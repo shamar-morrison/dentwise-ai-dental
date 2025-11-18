@@ -13,7 +13,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 function AppointmentsPage() {
-  // state management for the booking process - this could be done with something like Zustand for larger apps
   const [selectedDentistId, setSelectedDentistId] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
@@ -76,7 +75,6 @@ function AppointmentsPage() {
             console.error("Error sending confirmation email:", error);
           }
 
-          // show the success modal
           setShowConfirmationModal(true);
 
           // reset form
