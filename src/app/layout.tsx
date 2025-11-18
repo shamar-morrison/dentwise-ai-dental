@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import UserSync from "@/components/UserSync";
 import TanStackProvider from "@/components/providers/TanStackProvider";
 import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,17 @@ export default function RootLayout({
       >
         <html lang="en">
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
+            <NextTopLoader
+              color="#e78a53"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={true}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #e78a53,0 0 5px #e78a53"
+            />
             {/* this is done in the home page component */}
             {/* <UserSync /> */}
             <Toaster />
