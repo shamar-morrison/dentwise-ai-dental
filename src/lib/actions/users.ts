@@ -6,10 +6,25 @@ import { prisma } from "../prisma";
 export async function syncUser() {
   try {
     const user = await currentUser();
-    if (!user) return;
+    if (!user) {
+      console.log("No user found in syncUser - user not authenticated");
+      return null;
+    }
 
-    const existingUser = await prisma.user.findUnique({ where: { clerkId: user.id } });
-    if (existingUser) return existingUser;
+    // Validate required user data
+    if (!user.emailAddresses?.[0]?.emailAddress) {
+      console.error("User missing required email address", { clerkId: user.id });
+      throw new Error("User email address is required");
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { clerkId: user.id }
+    });
+
+    if (existingUser) {
+      console.log("User already exists in database", { clerkId: user.id });
+      return existingUser;
+    }
 
     const dbUser = await prisma.user.create({
       data: {
@@ -23,6 +38,11 @@ export async function syncUser() {
 
     return dbUser;
   } catch (error) {
-    console.log("Error in syncUser server action", error);
+    console.error("Error in syncUser server action:", {
+      error: error instanceof Error ? error.message : String(error),
+      errorType: error?.constructor?.name,
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    throw error; // Re-throw to surface the error instead of suppressing it
   }
 }
