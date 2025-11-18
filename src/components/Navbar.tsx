@@ -1,14 +1,26 @@
 "use client";
 
 import { UserButton, useUser } from "@clerk/nextjs";
-import { CalendarIcon, CrownIcon, HomeIcon, MicIcon } from "lucide-react";
+import { CalendarIcon, CrownIcon, HomeIcon, MicIcon, UserStar } from "lucide-react";
+import { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+
 function Navbar() {
   const { user } = useUser();
   const pathname = usePathname();
+
+  const isUserAdmin = user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL
+
+  const links: Array<{ href: string; label: string, icon: React.ReactNode, show?: boolean }> = [
+  { href: "/dashboard", label: "Dashboard", icon: <HomeIcon className="w-4 h-4"/> },
+  { href: "/appointments", label: "Appointments", icon: <CalendarIcon className="w-4 h-4"/> },
+  { href: "/voice", label: "Voice", icon: <MicIcon className="w-4 h-4"/> },
+  { href: "/pro", label: "Pro", icon: <CrownIcon className="w-4 h-4"/> },
+  { href: "/admin", label: "Admin", icon: <UserStar className="w-4 h-4"/>, show: isUserAdmin },
+];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-2 border-b border-border/50 bg-background/80 backdrop-blur-md h-16">
@@ -20,46 +32,20 @@ function Navbar() {
           </Link>
 
           <div className="flex items-center gap-6">
-            <Link
-              href="/dashboard"
-              className={`flex items-center gap-2 transition-colors ${
-                pathname === "/dashboard"
-                  ? "text-foreground hover:text-primary font-medium"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <HomeIcon className="w-4 h-4" />
-              <span className="hidden md:inline">Dashboard</span>
-            </Link>
-
-            <Link
-              href="/appointments"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/appointments" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              <CalendarIcon className="w-4 h-4" />
-              <span className="hidden md:inline">Appointments</span>
-            </Link>
-
-            <Link
-              href="/voice"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/voice" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              <MicIcon className="w-4 h-4" />
-              <span className="hidden md:inline">Voice</span>
-            </Link>
-            <Link
-              href="/pro"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/pro" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              <CrownIcon className="w-4 h-4" />
-              <span className="hidden md:inline">Pro</span>
-            </Link>
+            {links.map((link) => {
+              return (
+                <Link
+                key={link.href}
+                href={link.href as Route}
+                className={`flex items-center gap-2 transition-colors ${
+                  pathname === link.href ? "text-foreground hover:text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {link.icon}
+                <span className="hidden md:inline">{link.label}</span>
+              </Link>
+              )
+            })}
           </div>
         </div>
 
