@@ -25,18 +25,18 @@ function Footer() {
             <h4 className="font-medium mb-3">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-foreground">
+                <a href="#how" className="hover:text-foreground">
                   How it works
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground">
+                <a href="#pricing" className="hover:text-foreground">
                   Pricing
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground">
-                  FAQ
+                <a href="#about" className="hover:text-foreground">
+                  About
                 </a>
               </li>
             </ul>
