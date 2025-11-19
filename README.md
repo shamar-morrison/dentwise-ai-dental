@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DentWise AI
+
+DentWise AI is a modern, AI-powered dental practice management application designed to streamline patient interactions and administrative tasks. It features a comprehensive patient dashboard, appointment management system, and an advanced AI voice assistant powered by Vapi AI for natural language interactions.
+
+## Features
+
+- **Patient Dashboard**: A centralized hub for patients to view their appointments, history, and profile.
+- **Appointment Management**: Easy scheduling and management of dental appointments.
+- **Admin Portal**: Dedicated interface for practice administrators to manage the system.
+- **AI Voice Assistant**: Integrated voice assistant (Vapi AI) that allows patients to interact with the system using natural language for advice and guidance.
+- **Secure Authentication**: Robust user authentication and management using Clerk.
+- **Responsive Design**: Fully responsive UI built with Tailwind CSS and Shadcn UI components.
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Database**: [Neon](https://neon.com/) (via [Prisma ORM](https://www.prisma.io/))
+- **Authentication**: [Clerk](https://clerk.com/)
+- **AI & Voice**: [Vapi AI](https://vapi.ai/)
+- **Email**: [Resend](https://resend.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) / [Shadcn UI](https://ui.shadcn.com/)
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up the project locally.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js (v18 or later)
+- npm, yarn, pnpm, or bun
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **Clone the repository:**
+
+    ```bash
+    git clone <repository-url>
+    cd dentwise-ai-dental
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    # or
+    bun install
+    ```
+
+3.  **Set up environment variables:**
+
+    Create a `.env` file in the root directory and add the following variables. You will need to obtain API keys from the respective services.
+
+    ```env
+    # Database
+    DATABASE_URL="postgresql://..."
+
+    # Clerk Authentication
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
+    CLERK_SECRET_KEY="sk_test_..."
+
+    # Vapi AI
+    NEXT_PUBLIC_VAPI_API_KEY="your-vapi-public-key"
+    NEXT_PUBLIC_VAPI_ASSISTANT_ID="your-vapi-assistant-id"
+
+    # Resend Email
+    RESEND_API_KEY="re_..."
+    ```
+
+4.  **Setup the database:**
+
+    Generate the Prisma client and push the schema to your database.
+
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
+
+5.  **Run the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Documentation](https://clerk.com/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [Vapi Documentation](https://docs.vapi.ai/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
