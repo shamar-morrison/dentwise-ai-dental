@@ -14,7 +14,7 @@ async function AdminPage() {
   // user is not the admin
   if (!adminEmail || userEmail !== adminEmail) redirect("/dashboard");
 
-  return <AdminDashboardClient />;
+  return <AdminDashboardClient isAdmin={true} />;
 }
 
 export default AdminPage;
