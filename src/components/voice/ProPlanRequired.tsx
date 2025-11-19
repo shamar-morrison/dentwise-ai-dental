@@ -4,10 +4,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CrownIcon, LockIcon, MicIcon } from "lucide-react";
 import Link from "next/link";
 
-function ProPlanRequired({ isAdmin }: { isAdmin: boolean }) {
+function ProPlanRequired() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAdmin={isAdmin} />
+      <Navbar />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">

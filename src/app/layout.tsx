@@ -23,11 +23,17 @@ export const metadata: Metadata = {
     "Get instant dental advice through voice calls with our AI assistant. Avaiable 24/7.",
 };
 
-export default function RootLayout({
+import { AdminProvider } from "@/components/providers/AdminProvider";
+import { currentUser } from "@clerk/nextjs/server";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await currentUser();
+  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL;
+
   return (
     <TanStackProvider>
       <ClerkProvider
@@ -57,7 +63,7 @@ export default function RootLayout({
             {/* this is done in the home page component */}
             {/* <UserSync /> */}
             <Toaster />
-            {children}
+            <AdminProvider isAdmin={isAdmin}>{children}</AdminProvider>
           </body>
         </html>
       </ClerkProvider>

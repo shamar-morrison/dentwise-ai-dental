@@ -9,7 +9,7 @@ import { useGetDoctors } from "@/hooks/use-doctors";
 import { useUser } from "@clerk/nextjs";
 import { SettingsIcon } from "lucide-react";
 
-function AdminDashboardClient({ isAdmin }: { isAdmin: boolean }) {
+function AdminDashboardClient() {
   const { user } = useUser();
   const { data: doctors = [], isLoading: doctorsLoading } = useGetDoctors();
   const { data: appointments = [], isLoading: appointmentsLoading } = useGetAppointments();
@@ -22,11 +22,11 @@ function AdminDashboardClient({ isAdmin }: { isAdmin: boolean }) {
     completedAppointments: appointments.filter((app) => app.status === "COMPLETED").length,
   };
 
-  if (doctorsLoading || appointmentsLoading) return <LoadingUI isAdmin={isAdmin} />;
+  if (doctorsLoading || appointmentsLoading) return <LoadingUI />;
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAdmin={isAdmin} />
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
         {/* ADMIN WELCOME SECTION */}
@@ -70,10 +70,10 @@ function AdminDashboardClient({ isAdmin }: { isAdmin: boolean }) {
 
 export default AdminDashboardClient;
 
-function LoadingUI({ isAdmin }: { isAdmin: boolean }) {
+function LoadingUI() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAdmin={isAdmin} />
+      <Navbar />
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
         <div className="flex items-center justify-center h-96">
           <div className="text-center">

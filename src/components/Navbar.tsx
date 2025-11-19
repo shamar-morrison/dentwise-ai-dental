@@ -8,9 +8,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 
-function Navbar({ isAdmin }: { isAdmin: boolean }) {
+import { useAdmin } from "./providers/AdminProvider";
+
+function Navbar() {
   const { user } = useUser();
   const pathname = usePathname();
+  const { isAdmin } = useAdmin();
 
   const links: Array<{ href: string; label: string, icon: React.ReactNode, show?: boolean }> = [
   { href: "/dashboard", label: "Dashboard", icon: <HomeIcon className="w-4 h-4"/> },
