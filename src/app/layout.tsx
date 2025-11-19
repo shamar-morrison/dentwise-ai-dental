@@ -1,11 +1,10 @@
+import TanStackProvider from "@/components/providers/TanStackProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import UserSync from "@/components/UserSync";
-import TanStackProvider from "@/components/providers/TanStackProvider";
-import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +31,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await currentUser();
-  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL;
+  const isAdmin =
+    user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL;
 
   return (
     <TanStackProvider>
@@ -48,7 +48,9 @@ export default async function RootLayout({
         }}
       >
         <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+          >
             <NextTopLoader
               color="#e78a53"
               initialPosition={0.08}
