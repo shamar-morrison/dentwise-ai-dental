@@ -9,9 +9,11 @@ async function ProPage() {
 
   if (!user) redirect("/");
 
+  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL;
+
   return (
     <>
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
 
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
         <div className="mb-12 overflow-hidden">

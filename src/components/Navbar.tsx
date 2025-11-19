@@ -8,18 +8,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 
-function Navbar() {
+function Navbar({ isAdmin }: { isAdmin: boolean }) {
   const { user } = useUser();
   const pathname = usePathname();
-
-  const isUserAdmin = user?.emailAddresses?.[0]?.emailAddress === process.env.ADMIN_EMAIL
 
   const links: Array<{ href: string; label: string, icon: React.ReactNode, show?: boolean }> = [
   { href: "/dashboard", label: "Dashboard", icon: <HomeIcon className="w-4 h-4"/> },
   { href: "/appointments", label: "Appointments", icon: <CalendarIcon className="w-4 h-4"/> },
   { href: "/voice", label: "Voice", icon: <MicIcon className="w-4 h-4"/> },
   { href: "/pro", label: "Pro", icon: <CrownIcon className="w-4 h-4"/> },
-  { href: "/admin", label: "Admin", icon: <UserStar className="w-4 h-4"/>, show: isUserAdmin },
+  { href: "/admin", label: "Admin", icon: <UserStar className="w-4 h-4"/>, show: isAdmin },
 ];
 
   return (
@@ -33,7 +31,8 @@ function Navbar() {
 
           <div className="flex items-center gap-6">
             {links.map((link) => {
-              return (
+              if (link.show ?? true) {
+                return (
                 <Link
                 key={link.href}
                 href={link.href as Route}
@@ -44,7 +43,7 @@ function Navbar() {
                 {link.icon}
                 <span className="hidden md:inline">{link.label}</span>
               </Link>
-              )
+              )}
             })}
           </div>
         </div>
